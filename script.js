@@ -6,7 +6,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const errorMessage = document.getElementById('errorMessage');
     
     if (username === 'user' && password === 'password') {
-        window.location.href = 'kritik.html';
+        window.location.href = 'home.html';
     } else {
         errorMessage.textContent = 'Username atau password salah!';
     }
