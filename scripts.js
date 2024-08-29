@@ -1,3 +1,17 @@
+function showSection(sectionId) {
+    // Hide all content sections
+    var sections = document.querySelectorAll('.content-section');
+    sections.forEach(function(section) {
+        section.style.display = 'none';
+    });
+
+    // Show the selected section
+    document.getElementById(sectionId).style.display = 'block';
+}
+
+// Show the Dashboard by default
+showSection('dashboard');
+
 // Temperature chart
 var ctx = document.getElementById('temperatureChart').getContext('2d');
 var temperatureChart = new Chart(ctx, {
