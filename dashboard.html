@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Station - Dashboard</title>
+    <!-- Include a CSS file for styling -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include Chart.js library for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>MAIN STATION</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Station</a></li>
+            <li><a href="#">Raw Data</a></li>
+            <li><a href="#">Location</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for...">
+            </div>
+            <div class="user-profile">
+                <span>John Doe</span>
+                <img src="user-avatar.png" alt="User Avatar">
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-title">Total Data</div>
+                <div class="card-value">20</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Average Temperature</div>
+                <div class="card-value">27.5°C</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Average Humidity</div>
+                <div class="card-value">50%</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Device Online</div>
+                <div class="card-value">1</div>
+            </div>
+        </div>
+
+        <div class="charts">
+            <div class="chart-container">
+                <canvas id="temperatureChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="humidityChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
