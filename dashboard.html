@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Station - Dashboard</title>
-    <!-- Include a CSS file for styling -->
-    <link rel="stylesheet" href="css-dashboard.css">
-    <!-- Include Chart.js library for graphs -->
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -15,10 +13,10 @@
             <h2>MAIN STATION</h2>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Station</a></li>
-            <li><a href="#">Raw Data</a></li>
-            <li><a href="#">Location</a></li>
+            <li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="showSection('rawData')">Raw Data</a></li>
+            <li><a href="#" onclick="showSection('station')">Station</a></li>
+            <li><a href="#" onclick="showSection('location')">Location</a></li>
         </ul>
     </div>
 
@@ -33,32 +31,80 @@
             </div>
         </div>
 
-        <div class="dashboard">
-            <div class="card">
-                <div class="card-title">Total Data</div>
-                <div class="card-value">20</div>
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section">
+            <div class="dashboard">
+                <div class="card">
+                    <div class="card-title">Total Data</div>
+                    <div class="card-value"><?php echo $total_data; ?></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Average Temperature</div>
+                    <div class="card-value"><?php echo $avg_temp; ?>°C</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Average Humidity</div>
+                    <div class="card-value"><?php echo $avg_humidity; ?>%</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Device Online</div>
+                    <div class="card-value">1</div>
+                </div>
             </div>
-            <div class="card">
-                <div class="card-title">Average Temperature</div>
-                <div class="card-value">27.5°C</div>
-            </div>
-            <div class="card">
-                <div class="card-title">Average Humidity</div>
-                <div class="card-value">50%</div>
-            </div>
-            <div class="card">
-                <div class="card-title">Device Online</div>
-                <div class="card-value">1</div>
+
+            <div class="charts">
+                <div class="chart-container">
+                    <canvas id="temperatureChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="humidityChart"></canvas>
+                </div>
             </div>
         </div>
 
-        <div class="charts">
-            <div class="chart-container">
-                <canvas id="temperatureChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <canvas id="humidityChart"></canvas>
-            </div>
+        <!-- Raw Data Section -->
+        <div id="rawData" class="content-section" style="display: none;">
+            <h2>Raw Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- PHP loop to display raw data from database -->
+                    <?php
+                    $sql = "SELECT date, temperature, humidity FROM your_table WHERE station = '$station' AND date BETWEEN '$start_date' AND '$end_date'";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                    <td>{$row['date']}</td>
+                                    <td>{$row['temperature']}°C</td>
+                                    <td>{$row['humidity']}%</td>
+                                  </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='3'>No data available</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Station Section -->
+        <div id="station" class="content-section" style="display: none;">
+            <h2>Station Information</h2>
+            <p>Details about the station will go here...</p>
+        </div>
+
+        <!-- Location Section -->
+        <div id="location" class="content-section" style="display: none;">
+            <h2>Location</h2>
+            <p>Map and location details will go here...</p>
         </div>
     </div>
 
